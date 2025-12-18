@@ -1,0 +1,64 @@
+{
+  "name": "rmc-construction-management",
+  "version": "1.0.0",
+  "description": "Employee and Attendance Management System for VNRI RMC",
+  "main": "electron-main.js",
+  "scripts": {
+    "start": "node backend/server.js",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "server": "nodemon backend/server.js",
+    "client": "npm start --prefix frontend",
+    "install-all": "npm install && cd frontend && npm install",
+    "electron:start": "electron .",
+    "build-client": "npm run build --prefix frontend",
+    "pack": "npm run build-client && electron-builder --win --x64",
+    "dist": "npm run build-client && electron-builder"
+  },
+  "keywords": [
+    "MERN",
+    "attendance",
+    "employee-management"
+  ],
+  "author": "VNRI RMC",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "csv-parser": "^3.0.0",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "express-validator": "^7.0.1",
+    "json2csv": "^6.0.0-alpha.2",
+    "jsonwebtoken": "^9.0.2",
+    "multer": "^1.4.5-lts.1",
+    "mysql2": "^3.15.3",
+    "pdfkit": "^0.14.0",
+    "sequelize": "^6.37.7"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2",
+    "electron": "^26.0.0",
+    "electron-builder": "^24.6.0",
+    "nodemon": "^3.0.2"
+  },
+  "build": {
+    "appId": "com.vasudevnarayan.rmc",
+    "productName": "Vasudevnarayan RMC",
+    "files": [
+      "backend/**",
+      "frontend/build/**",
+      "electron-main.js",
+      "electron-preload.js",
+      "package.json"
+    ],
+    "directories": {
+      "buildResources": "build"
+    },
+    "win": {
+      "target": [
+        "nsis"
+      ],
+      "artifactName": "VNRI-RMC-Setup-${version}.exe"
+    }
+  }
+}
